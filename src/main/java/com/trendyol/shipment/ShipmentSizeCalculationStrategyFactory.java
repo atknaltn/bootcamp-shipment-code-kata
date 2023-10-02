@@ -1,5 +1,7 @@
 package com.trendyol.shipment;
 
+import com.trendyol.shipment.exceptions.EmptyBasketException;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +58,6 @@ public class ShipmentSizeCalculationStrategyFactory {
                 .filter(entry -> entry.getValue() > 0)
                 .map(Map.Entry::getKey)
                 .max(ShipmentSize::compareTo)
-                .orElseThrow(NullPointerException::new);
+                .orElseThrow(() -> new EmptyBasketException("There is no product in the basket"));
     }
 }
